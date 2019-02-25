@@ -18,7 +18,7 @@ composer require mdiederen/silverstripe-pwa
 - Run dev/build after the installation.
 - Include the js to register the Service Worker
 ```
-Requirements::javascript('mdiederen/SilverStripe-PWA:resources/js/registerServiceWorker.js');
+Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServiceWorker.js');
 ```
 - Add this metadata to the header of the website
 ```
