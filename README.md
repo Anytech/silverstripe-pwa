@@ -10,7 +10,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 ## Installation
 
 ```
-composer require mdiederen/SilverStripe-PWA
+composer require mdiederen/silverstrip-pwa
 ```
 
 ## Usage
