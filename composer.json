@@ -1,7 +1,7 @@
 {
-    "name": "mdiederen/SilverStripe-PWA",
+    "name": "mdiederen/silverstrip-pwa",
     "description": "Module that adds PWA support to SilverStripe project",
-    "homepage": "http://github.com/mdiederen/SilverStripe-PWA",
+    "homepage": "http://github.com/mdiederen/silverstrip-pwa",
     "type": "silverstripe-vendormodule",
     "keywords": [
         "silverstripe",
@@ -16,7 +16,7 @@
         "email": "michiel@violet88.nl"
     }],
     "support": {
-        "issues": "http://github.com/mdiederen/SilverStripe-PWA/issues"
+        "issues": "http://github.com/mdiederen/silverstrip-pwa/issues"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -28,14 +28,14 @@
     },
     "autoload": {
         "psr-4": {
-            "mdiederen\\SilverStripe-PWA\\": "src/"
+            "mdiederen\\silverstrip-pwa\\": "src/"
         }
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
     },
     "extra": {
-        "installer-name": "SilverStripe-PWA",
+        "installer-name": "silverstrip-pwa",
         "expose": [
             "resources"
         ]
