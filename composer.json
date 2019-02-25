@@ -1,0 +1,34 @@
+{
+    "name": "mdiederen/SilverStripe-PWA",
+    "description": "Module that adds PWA support to SilverStripe project",
+    "homepage": "http://github.com/mdiederen/SilverStripe-PWA",
+    "type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "progressive",
+        "web",
+        "app",
+        "PWA"
+    ],
+    "license": "MIT",
+    "authors": [{
+        "name": "Michiel Diederen",
+        "email": "michiel@violet88.nl"
+    }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "silverstripe/cms": "^4.0@dev",
+        "silverstripe/vendor-plugin": "^1.0",
+        "silverware/colorpicker": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "extra": {
+        "installer-name": "silverstripe-PWA",
+        "expose": [
+            "resources"
+        ]
+    }
+}

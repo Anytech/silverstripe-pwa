@@ -1,0 +1,14 @@
+---
+Name: SilverStripe-PWA
+---
+
+SilverStripe\Control\Director:
+  rules:
+    'manifest.json': 'SilverStripePWA\Controllers\ManifestController'
+    'service-worker.js': 'SilverStripePWA\Controllers\ServiceWorkerController'
+    
+SilverStripe\SiteConfig\SiteConfig:
+    extensions:
+        - SilverStripePWA\Extensions\ManifestSiteConfigExtension
+        - SilverStripePWA\Extensions\PushNotificationsSiteConfigExtension
+
