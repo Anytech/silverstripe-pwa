@@ -15,18 +15,27 @@
         "name": "Michiel Diederen",
         "email": "michiel@violet88.nl"
     }],
+    "support": {
+        "issues": "http://github.com/mdiederen/SilverStripe-PWA/issues"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "silverstripe/cms": "^4.0@dev",
+        "silverstripe/framework": "^4",
         "silverstripe/vendor-plugin": "^1.0",
         "silverware/colorpicker": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "mdiederen\\SilverStripe-PWA\\": "src/"
+        }
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
     },
     "extra": {
-        "installer-name": "silverstripe-PWA",
+        "installer-name": "SilverStripe-PWA",
         "expose": [
             "resources"
         ]
