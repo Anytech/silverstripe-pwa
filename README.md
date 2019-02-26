@@ -6,6 +6,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 - SilverStripe ^4.0
 - silverware/colorpicker ^1.0
 - silverstripe/vendor-plugin ^1.0
+- minishlink/web-push ^5.2
 
 ## Installation
 
@@ -19,6 +20,7 @@ composer require mdiederen/silverstripe-pwa
 - Include the js to register the Service Worker
 ```
 Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServiceWorker.js');
+Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/pushNotifications.js');
 ```
 - Add this metadata to the header of the website
 ```

@@ -24,7 +24,9 @@
         "silverstripe/cms": "^4.0@dev",
         "silverstripe/framework": "^4",
         "silverstripe/vendor-plugin": "^1.0",
-        "silverware/colorpicker": "^1.0"
+        "silverware/colorpicker": "^1.0",
+        "minishlink/web-push": "^5.2"
+
     },
     "autoload": {
         "psr-4": {
