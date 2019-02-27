@@ -21,7 +21,6 @@ composer require mdiederen/silverstripe-pwa
 - Include the js to register the Service Worker
 ```
 Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServiceWorker.js');
-Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/pushNotifications.js');
 ```
 - Add this metadata to the header of the website
 ```
