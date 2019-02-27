@@ -1,7 +1,13 @@
 # PWA module for SilverStripe
 
-! NOT FULLY WORKING YET !
-This module will add a Service Worker & Web Manifest to your SilverStripe Project. You can change the PWA settings in the settings section inside the CMS.
+This module will add a Service Worker & Web Manifest to your SilverStripe Project. You can change the manifest settings in the site-settings section inside the CMS.
+
+## Functions
+
+- Deploy a web-manifest from the CMS (Working)
+- Service worker that caches website for faster loading times (Working)
+- Handle push events (In Progress)
+- Send push-notifications from CMS (In Progress)
 
 ## Requirements
 - SilverStripe ^4.0
