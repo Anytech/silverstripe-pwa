@@ -6,6 +6,8 @@ SilverStripe\Control\Director:
   rules:
     'manifest.json': 'SilverStripePWA\Controllers\ManifestController'
     'service-worker.js': 'SilverStripePWA\Controllers\ServiceWorkerController'
+    'notifications.js': 'SilverStripePWA\Controllers\NotificationController'
+
     
 SilverStripe\SiteConfig\SiteConfig:
     extensions:

@@ -1,6 +1,6 @@
 # PWA module for SilverStripe
 
-This module will add a Service Worker & Web Manifest to your SilverStripe Project. You can change the manifest settings in the site-settings section inside the CMS.
+This module will add a Service Worker & Web Manifest to your SilverStripe Project. You can change the manifestsettings in the site-settings section inside the CMS.
 
 ## Functions
 
@@ -32,6 +32,8 @@ Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServic
 ```
 <meta name="theme-color" content="$SiteConfig.ManifestColor">
 <link rel="manifest" href="{$BaseHref}manifest.json">
+<script src="{$BaseHref}notifications.js"></script>
+
 ```
 ## License
 
