@@ -13,6 +13,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 - SilverStripe ^4.0
 - silverware/colorpicker ^1.0
 - silverstripe/vendor-plugin ^1.0
+- silverstripe/restfulserver dev-master
 - minishlink/web-push ^5.2
 
 ## Installation
