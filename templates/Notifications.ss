@@ -94,7 +94,7 @@ self.addEventListener('fetch', function (event) {
         fetch(event.request).catch(function (error) {
             console.log('Network request Failed. Serving offline page ' + error);
             return caches.open('offlinePage').then(function (cache) {
-                return cache.match(baseURL+'/offline.html');
+                return cache.match(baseURL+'offline.html');
             });
         }));
 });
