@@ -1,127 +1,72 @@
     var version = 'v1::';
-    var debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
-    
+    var debug = <% if $DebugMode %> true <% else %> false <% end_if %>;
+    var baseURL = $BaseUrl;
+
     /**
      * Console.log proxy for quick enabling/disabling
      */
-    function log(msg){
-        if(debug){
+    function log(msg) {
+        if (debug) {
             console.log(msg);
         }
     }
 
-    /**
-     * Service worker installation
-     */
+    //Install stage sets up the offline page in the cache and opens a new cache
     self.addEventListener('install', function (event) {
-        log('Service worker: install start');
-        event.waitUntil(caches.open(version + 'fundamentals').then(function (cache) {
-            //Install all required pages/assets
-            return cache.addAll([
-                '$BaseUrl'<% if $CacheOnInstall %>,<% end_if %>
-                <% if $CacheOnInstall %>
-                    <% loop $CacheOnInstall %>
-                        '$Path'<% if not $Last %>,<% end_if %>
-                    <% end_loop %>
-                <% end_if %>
-            ]);
-        }).then(function () {
-            log('Service worker: install completed');
-        }).catch(function(){
-            log('Service worker: install failed');
-        }));
+        var offlinePage = new Request(baseURL + 'offline.html');
+        event.waitUntil(
+            fetch(offlinePage).then(function (response) {
+                return caches.open('BIJ-offline').then(function (cache) {
+                    log('Cached offline page during Install ' + response.url);
+                    return cache.put(offlinePage, response);
+                });
+            }));
     });
 
-    /**
-     * Service worker activation
-     */
-    self.addEventListener('activate', function (event) {
-        log('Service worker: activate start');
-        event.waitUntil(caches.keys().then(function (keys) {
-            //Remove old cache entries
-            return Promise.all(keys.filter(function (key) {
-                return !key.startsWith(version);
-            }).map(function (key) {
-                return caches.delete(key);
-            }));
-        }).then(function () {
-            log('Service worker: activate completed');
-        }));
-    });
-    
-    /**
-     * Fetch handler
-     */
+    //If any fetch fails, it will show the offline page.
     self.addEventListener('fetch', function (event) {
-        //We are only interested in get requests
-        if (event.request.method !== 'GET') {
-            return;
-        }
-                                   
-        //Parse the url
-        var requestURL = new URL(event.request.url);
-                                   
-        //Skip admin url's
-        if(requestURL.pathname.indexOf('admin') >= 0 || requestURL.pathname.indexOf('Security') >= 0 || requestURL.pathname.indexOf('dev') >= 0){
-            log('Service worker: skip admin ' + event.request.url);
-            return;
-        }
-        
-        //Test for images
-        if (/\.(jpg|jpeg|png|gif|webp)$/.test(requestURL.pathname)) {
-            log('Service worker: skip image ' + event.request.url);
-            //For now we skip images but change this later to maybe some caching and/or an offline fallback
-            return;
-        }
-        
-        //Check for our own urls
-        if (requestURL.origin == location.origin) {
-            //All our own urls are following this route:
-            //-If there is cache serve from cache but also update the cache from the network
-            //-If there is no cache then get from the network and put in the cache
-            //-If both fail fallback to a generic offline message
-            event.respondWith(caches.match(event.request).then(function (cached) {
-                var networked = fetch(event.request).then(fetchedFromNetwork, unableToResolve).catch(unableToResolve);
-                log('Service worker: fetch event ' + (cached ? '(cached)' : '(network)') + ' - ' + event.request.url);
-                return cached || networked;
-                
-                /**
-                * Fetched from network handler
-                */
-               function fetchedFromNetwork(response) {
-                   var cacheCopy = response.clone();
-                   log('Service worker fetch from network - ' + event.request.url);
-                   caches.open(version + 'pages').then(function add(cache) {
-                       cache.put(event.request, cacheCopy);
-                   }).then(function () {
-                       log('Service worker: fetch response stored in cache - ' + event.request.url);
-                   });
-                   return response;
-               }
-
-               /**
-                * No internet and no cache handler
-                */
-               function unableToResolve(error) {
-                   log('Service worker: fetch request failed in both cache and network ' + error);
-                   return new Response('<h1>Service Unavailable</h1>', {
-                       status: 503,
-                       statusText: 'Service Unavailable',
-                       headers: new Headers({
-                           'Content-Type': 'text/html'
-                       })
-                   });
-               }
-                
+        event.respondWith(
+            fetch(event.request).catch(function (error) {
+                log('Network request Failed. Serving offline page ' + error);
+                return caches.open('BIJ-offline').then(function (cache) {
+                    return cache.match(baseURL + 'offline.html');
+                });
             }));
-            return;
-        }
-        
-        //All others, nothing special here
-        log('Service worker: other url - ' + event.request.url);
-        event.respondWith(caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
-        }));
+    });
 
-        
+    //This is a event that can be fired from your page to tell the SW to update the offline page
+    self.addEventListener('refreshOffline', function (response) {
+        return caches.open('BIJ-offline').then(function (cache) {
+            log('Offline page updated from refreshOffline event: ' + response.url);
+            return cache.put(offlinePage, response);
+        });
+    });
+
+    // Listen for push-notifications and display them.
+    self.addEventListener('push', function (event) {
+        log('Push received: ', event);
+        let _data = event.data ? JSON.parse(event.data.text()) : {};
+        notificationUrl = _data.url;
+        event.waitUntil(
+            self.registration.showNotification(_data.title, {
+                body: _data.message,
+                icon: _data.icon,
+                tag: _data.tag
+            })
+        );
+    });
+
+    self.addEventListener('notificationclick', function (event) {
+        event.notification.close();
+
+        event.waitUntil(
+            clients.matchAll({
+                type: "window"
+            })
+            .then(function (clientList) {
+                if (clients.openWindow) {
+                    return clients.openWindow(notificationUrl);
+                }
+            })
+        );
     });
