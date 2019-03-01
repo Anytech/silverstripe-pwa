@@ -75,7 +75,7 @@ function saveSubscription(subscription) {
 
     console.log(key, token, endpoint);
 
-    xmlHttp.open("POST", baseURL + "/api/v1/SilverStripe-PushNotifications-Subscription/");
+    xmlHttp.open("POST", baseURL + "api/v1/SilverStripePWA-Models-Subscription/");
     xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState != 4) return;
