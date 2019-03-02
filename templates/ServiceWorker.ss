@@ -16,7 +16,7 @@
         var offlinePage = new Request(baseURL + 'offline.html');
         event.waitUntil(
             fetch(offlinePage).then(function (response) {
-                return caches.open('BIJ-offline').then(function (cache) {
+                return caches.open('offline-page').then(function (cache) {
                     log('Cached offline page during Install ' + response.url);
                     return cache.put(offlinePage, response);
                 });
@@ -28,7 +28,7 @@
         event.respondWith(
             fetch(event.request).catch(function (error) {
                 log('Network request Failed. Serving offline page ' + error);
-                return caches.open('BIJ-offline').then(function (cache) {
+                return caches.open('offline-page').then(function (cache) {
                     return cache.match(baseURL + 'offline.html');
                 });
             }));
@@ -36,7 +36,7 @@
 
     //This is a event that can be fired from your page to tell the SW to update the offline page
     self.addEventListener('refreshOffline', function (response) {
-        return caches.open('BIJ-offline').then(function (cache) {
+        return caches.open('offline-page').then(function (cache) {
             log('Offline page updated from refreshOffline event: ' + response.url);
             return cache.put(offlinePage, response);
         });
