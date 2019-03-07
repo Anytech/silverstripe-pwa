@@ -7,7 +7,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Core\ClassInfo;
-use SilverStripePWA\Interfaces\ServiceWorkerCacheProvider;
 
 class ServiceWorkerController extends Controller {
 
@@ -50,26 +49,6 @@ class ServiceWorkerController extends Controller {
             return true;
         }
         return $this->config()->get('debug_mode');
-    }
-    
-    /**
-     * A list with file to cache in the install event
-     * @return ArrayList
-     */
-    public function CacheOnInstall() {
-        $paths = [];
-        foreach(ClassInfo::implementorsOf(ServiceWorkerCacheProvider::class) as $class){
-            foreach($class::getServiceWorkerCachedPaths() as $path){
-                $paths[] = $path;
-            }
-        }
-        $list = new ArrayList();
-        foreach($paths as $path){
-            $list->push(new ArrayData([
-                'Path' => $path
-            ]));
-        }
-        return $list;
     }
 
 }
