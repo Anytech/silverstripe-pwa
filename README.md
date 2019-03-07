@@ -5,9 +5,9 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 ## Functions
 
 - Deploy a web-manifest from the CMS (Working)
-- Service worker that caches website for faster loading times (Working)
-- Handle incomming push events (In Progress)
-- Subscripe users to push-service (In Progress)
+- Service worker that displays offline-page when there is not connection (Working)
+- Handle incomming push events (Working)
+- Subscripe users to push-service (Working)
 - Send push-notifications from CMS (In Progress)
 
 ## Requirements
@@ -18,6 +18,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 - minishlink/web-push ^5.2
 
 ## Installation
+**Not working right now**
 
 ```
 composer require mdiederen/silverstripe-pwa
@@ -51,4 +52,3 @@ See [License](LICENSE)
 ## Maintainers
 
 Michiel Diederen - michiel@violet88.nl
-
