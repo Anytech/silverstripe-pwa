@@ -1,6 +1,6 @@
 let isSubscribed = false;
 let swRegistration = null;
-let applicationKey = "BILv757RtZendMguPVvhGSs50ZYq8MxVCrtTbtMqapIA6UPr7KD7LnRUXFWvedqtNG7bcWZ4WQm2zycmgZbuOXw";
+let applicationKey = "BOyWSndPyP1kHhyqTY4Zqm6lL1cbTSotBHkqv1G1sLzO18xU5oF4uPS3AoQhhe9O5gJbhwMDueFSTipS6AFzK5g=";
 var baseURL = $BaseUrl;
 
 
@@ -62,31 +62,21 @@ else {
     console.warn('Push messaging is not supported');
 }
 
-// Send request to database for add new subscriber
 function saveSubscription(subscription) {
-    let xmlHttp = new XMLHttpRequest();
     const key = subscription.getKey('p256dh');
     const token = subscription.getKey('auth');
-    const endpoint = subscription.endpoint;
-
     const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
-    const publicKey = key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null;
-    const authToken = token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null;
 
-    console.log(key, token, endpoint);
-
-    xmlHttp.open("POST", baseURL + "api/v1/SilverStripePWA-Models-Subscription/");
-    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState != 4) return;
-        if (xmlHttp.status != 201 && xmlHttp.status != 304) {
-            console.log('HTTP error ' + xmlHttp.status, null);
-        } else {
-            console.log("User subscribed to server");
-        }
-    };
-    xmlHttp.send("endpoint="+endpoint+"&p256dh="+publicKey+"&auth="+authToken);
-}
+    return fetch(baseURL + "add_subscription", {
+      method: 'POST',
+      body: JSON.stringify({
+        endpoint: subscription.endpoint,
+        publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+        authToken: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+        contentEncoding,
+      }),
+    }).then(() => subscription);
+  }
 
 //If any fetch fails, it will show the offline page.
 self.addEventListener('fetch', function (event) {
@@ -135,3 +125,4 @@ self.addEventListener('notificationclick', function (event) {
         })
     );
 });
+

@@ -4,6 +4,7 @@ namespace SilverStripePWA\Controllers;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Control\Director;
 
 class ManifestController extends Controller {
 
@@ -22,8 +23,9 @@ class ManifestController extends Controller {
     public function index($url) {
 
         $config = SiteConfig::current_site_config();
+        $baseURL = Director::BaseURL();
         $manifestContent = [];
-        $manifestContent['start_url'] = '/';
+        $manifestContent['start_url'] = $baseURL;
 
         if($config->ManifestName){
             $manifestContent['name'] = $config->ManifestName;

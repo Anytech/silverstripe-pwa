@@ -27,7 +27,6 @@
         "silverware/colorpicker": "^1.0",
         "minishlink/web-push": "^5.2",
         "silverstripe/restfulserver": "dev-master"
-
     },
     "autoload": {
         "psr-4": {

@@ -51,24 +51,24 @@ class NotificationController extends Controller {
         return $this->config()->get('debug_mode');
     }
     
-    /**
-     * A list with file to cache in the install event
-     * @return ArrayList
-     */
-    public function CacheOnInstall() {
-        $paths = [];
-        foreach(ClassInfo::implementorsOf(ServiceWorkerCacheProvider::class) as $class){
-            foreach($class::getServiceWorkerCachedPaths() as $path){
-                $paths[] = $path;
-            }
-        }
-        $list = new ArrayList();
-        foreach($paths as $path){
-            $list->push(new ArrayData([
-                'Path' => $path
-            ]));
-        }
-        return $list;
-    }
+    // /**
+    //  * A list with file to cache in the install event
+    //  * @return ArrayList
+    //  */
+    // public function CacheOnInstall() {
+    //     $paths = [];
+    //     foreach(ClassInfo::implementorsOf(ServiceWorkerCacheProvider::class) as $class){
+    //         foreach($class::getServiceWorkerCachedPaths() as $path){
+    //             $paths[] = $path;
+    //         }
+    //     }
+    //     $list = new ArrayList();
+    //     foreach($paths as $path){
+    //         $list->push(new ArrayData([
+    //             'Path' => $path
+    //         ]));
+    //     }
+    //     return $list;
+    // }
 
 }

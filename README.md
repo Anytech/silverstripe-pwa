@@ -6,7 +6,8 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 
 - Deploy a web-manifest from the CMS (Working)
 - Service worker that caches website for faster loading times (Working)
-- Handle push events (In Progress)
+- Handle incomming push events (In Progress)
+- Subscripe users to push-service (In Progress)
 - Send push-notifications from CMS (In Progress)
 
 ## Requirements
@@ -36,6 +37,13 @@ Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServic
 <script src="{$BaseHref}notifications.js"></script>
 
 ```
+- You have to generate your own private & public key and put them in the _config directory for the VAPID authentication used by the push-manager. You can do this on unix (linux / MacOS) using the following commands:
+```pseudocode
+$ openssl ecparam -genkey -name prime256v1 -out private_key.pem
+$ openssl ec -in private_key.pem -pubout -outform DER|tail -c 65|base64|tr -d '=' |tr '/+' '_-' >> public_key.txt
+$ openssl ec -in private_key.pem -outform DER|tail -c +8|head -c 32|base64|tr -d '=' |tr '/+' '_-' >> private_key.txt
+```
+
 ## License
 
 See [License](LICENSE)
@@ -43,3 +51,4 @@ See [License](LICENSE)
 ## Maintainers
 
 Michiel Diederen - michiel@violet88.nl
+

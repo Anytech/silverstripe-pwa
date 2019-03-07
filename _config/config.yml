@@ -8,8 +8,9 @@ SilverStripe\Control\Director:
     'service-worker.js': 'SilverStripePWA\Controllers\ServiceWorkerController'
     'notifications.js': 'SilverStripePWA\Controllers\NotificationController'
     'offline.html': 'SilverStripePWA\Controllers\OfflineController'
+    'push': 'SilverStripePWA\Controllers\PushNotificationController'
+    'add_subscription': 'SilverStripePWA\Controllers\SubscriptionController'
 
-    
 SilverStripe\SiteConfig\SiteConfig:
     extensions:
         - SilverStripePWA\Extensions\ManifestSiteConfigExtension

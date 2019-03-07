@@ -1,72 +1,72 @@
     var version = 'v1::';
-    var debug = <% if $DebugMode %> true <% else %> false <% end_if %>;
+    var debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
     var baseURL = $BaseUrl;
 
     /**
      * Console.log proxy for quick enabling/disabling
      */
-    function log(msg) {
-        if (debug) {
+    function log(msg){
+        if(debug){
             console.log(msg);
         }
     }
 
     //Install stage sets up the offline page in the cache and opens a new cache
-    self.addEventListener('install', function (event) {
-        var offlinePage = new Request(baseURL + 'offline.html');
-        event.waitUntil(
-            fetch(offlinePage).then(function (response) {
-                return caches.open('offline-page').then(function (cache) {
-                    log('Cached offline page during Install ' + response.url);
-                    return cache.put(offlinePage, response);
-                });
-            }));
-    });
+self.addEventListener('install', function (event) {
+    var offlinePage = new Request(baseURL+'offline.html');
+    event.waitUntil(
+        fetch(offlinePage).then(function (response) {
+            return caches.open('offline-page').then(function (cache) {
+                console.log('Cached offline page during Install ' + response.url);
+                return cache.put(offlinePage, response);
+            });
+        }));
+});
 
-    //If any fetch fails, it will show the offline page.
-    self.addEventListener('fetch', function (event) {
-        event.respondWith(
-            fetch(event.request).catch(function (error) {
-                log('Network request Failed. Serving offline page ' + error);
-                return caches.open('offline-page').then(function (cache) {
-                    return cache.match(baseURL + 'offline.html');
-                });
-            }));
-    });
+//If any fetch fails, it will show the offline page.
+self.addEventListener('fetch', function (event) {
+    event.respondWith(
+        fetch(event.request).catch(function (error) {
+            console.log('Network request Failed. Serving offline page ' + error);
+            return caches.open('offline-page').then(function (cache) {
+                return cache.match(baseURL+'offline.html');
+            });
+        }));
+});
 
-    //This is a event that can be fired from your page to tell the SW to update the offline page
-    self.addEventListener('refreshOffline', function (response) {
-        return caches.open('offline-page').then(function (cache) {
-            log('Offline page updated from refreshOffline event: ' + response.url);
-            return cache.put(offlinePage, response);
-        });
+//This is a event that can be fired from your page to tell the SW to update the offline page
+self.addEventListener('refreshOffline', function (response) {
+    return caches.open('offline-page').then(function (cache) {
+        console.log('Offline page updated from refreshOffline event: ' + response.url);
+        return cache.put(offlinePage, response);
     });
+});
 
-    // Listen for push-notifications and display them.
-    self.addEventListener('push', function (event) {
-        log('Push received: ', event);
-        let _data = event.data ? JSON.parse(event.data.text()) : {};
-        notificationUrl = _data.url;
-        event.waitUntil(
-            self.registration.showNotification(_data.title, {
-                body: _data.message,
-                icon: _data.icon,
-                tag: _data.tag
-            })
-        );
-    });
+// Listen for push-notifications and display them.
+self.addEventListener('push', function (event) {
+    console.log('Push received: ', event);
+    let _data = event.data ? JSON.parse(event.data.text()) : {};
+    notificationUrl = _data.url;
+    event.waitUntil(
+        self.registration.showNotification(_data.title, {
+            body: _data.message,
+            icon: _data.icon,
+            tag: _data.tag
+        })
+    );
+});
 
-    self.addEventListener('notificationclick', function (event) {
-        event.notification.close();
+self.addEventListener('notificationclick', function (event) {
+    event.notification.close();
 
-        event.waitUntil(
-            clients.matchAll({
-                type: "window"
-            })
-            .then(function (clientList) {
-                if (clients.openWindow) {
-                    return clients.openWindow(notificationUrl);
-                }
-            })
-        );
-    });
+    event.waitUntil(
+        clients.matchAll({
+            type: "window"
+        })
+        .then(function (clientList) {
+            if (clients.openWindow) {
+                return clients.openWindow(notificationUrl);
+            }
+        })
+    );
+});
