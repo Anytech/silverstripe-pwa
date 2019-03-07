@@ -7,7 +7,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 - Deploy a web-manifest from the CMS (Working)
 - Service worker that displays offline-page when there is not connection (Working)
 - Handle incomming push events (Working)
-- Subscripe users to push-service (Working)
+- Subscribe devices to push-service (Working)
 - Send push-notifications from CMS (In Progress)
 
 ## Requirements
