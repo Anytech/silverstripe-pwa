@@ -27,6 +27,7 @@ class PushNotificationController extends Controller
     public function index(HTTPRequest $request) {
         $subscribers = Subscriber::get();
 
+        // TO-DO lees keys uit bestanden
         $auth = [
             'VAPID' => [
                 'subject' => 'mailto:michiel@violet88.nl',
@@ -45,16 +46,16 @@ class PushNotificationController extends Controller
 
                 foreach($subscribers as $subscriber) {
                     
-                    $subscriptionArray = [
+                    $subscriberArray = [
                         'endpoint' => $subscriber->endpoint,
                         'publicKey' => $subscriber->publicKey,
                         'authToken' => $subscriber->authToken,
                         'contentEncoding' => $subscriber->contentEncoding
                     ];
 
-                    $subscription = Subscription::create($subscriptionArray);
+                    $sub = Subscription::create($subscriberArray);
 
-                    $sent = $webPush->sendNotification($subscription, $payload);
+                    $sent = $webPush->sendNotification($sub, $payload);
             
                 }
 
@@ -69,16 +70,21 @@ class PushNotificationController extends Controller
                     } else {
                         $isTheEndpointWrongOrExpired = $report->isSubscriptionExpired();
                         if($isTheEndpointWrongOrExpired) {
-                            $response[$endpoint] = "Push Failed, device no longer subscribed.";
+
+                            // Delete subscriber from db
+                            $subscription = $subscribers->find('endpoint', $endpoint);
+                            $subscription->delete();
+
+                            $response[$endpoint] = "Push Failed, device no longer subscribed -> subscription removed from DB";
 
                         } else {
                             $response[$endpoint] = "Push Failed :( {$report->getReason()}";
 
                         }
                     }
-                }
-
+                } 
                 return json_encode($response);
+
                 break;
             case 'PUT':
                 echo "Error: PUT-method not handled";
@@ -95,4 +101,3 @@ class PushNotificationController extends Controller
             }
     }
 }
-
