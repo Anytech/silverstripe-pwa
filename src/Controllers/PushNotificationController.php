@@ -27,12 +27,11 @@ class PushNotificationController extends Controller
     public function index(HTTPRequest $request) {
         $subscribers = Subscriber::get();
 
-        // TO-DO lees keys uit bestanden
         $auth = [
             'VAPID' => [
                 'subject' => 'mailto:michiel@violet88.nl',
-                'publicKey' => 'BOyWSndPyP1kHhyqTY4Zqm6lL1cbTSotBHkqv1G1sLzO18xU5oF4uPS3AoQhhe9O5gJbhwMDueFSTipS6AFzK5g=',
-                'privateKey' => '+rLOL2cF6KCdzNjOMukgNNgf09PbtA+kiJk0QIjzJm0=',
+                'publicKey' => file_get_contents(__DIR__ . "/../../_config/public_key.txt"),
+                'privateKey' => file_get_contents(__DIR__ . "/../../_config/private_key.txt"),
             ],
         ];
 

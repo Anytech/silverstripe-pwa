@@ -1,7 +1,7 @@
 let isSubscribed = false;
 let swRegistration = null;
-let applicationKey = "BOyWSndPyP1kHhyqTY4Zqm6lL1cbTSotBHkqv1G1sLzO18xU5oF4uPS3AoQhhe9O5gJbhwMDueFSTipS6AFzK5g=";
-var baseURL = $BaseUrl;
+let applicationKey = "$PublicKey";
+let baseURL = $BaseUrl;
 
 
 // Url Encription

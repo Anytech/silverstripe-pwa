@@ -39,6 +39,14 @@ class NotificationController extends Controller {
     public function BaseUrl() {
         return Director::baseURL();
     }
+
+    /**
+     * Public Key
+     * @return varchar
+     */
+    public function PublicKey() {
+        return (string)file_get_contents(__DIR__ . "/../../_config/public_key.txt");
+    }
     
     /**
      * Debug mode
