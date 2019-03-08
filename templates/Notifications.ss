@@ -1,8 +1,17 @@
 let isSubscribed = false;
 let swRegistration = null;
 let applicationKey = "$PublicKey";
-let baseURL = $BaseUrl;
+var debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
+var baseURL = $BaseUrl;
 
+    /**
+     * Console.log proxy for quick enabling/disabling
+     */
+    function log(msg){
+        if(debug){
+            console.log(msg);
+        }
+    }
 
 // Url Encription
 function urlB64ToUint8Array(base64String) {
@@ -22,10 +31,10 @@ function urlB64ToUint8Array(base64String) {
 
 // Installing service worker
 if ('serviceWorker' in navigator && 'PushManager' in window) {
-    console.log('Service Worker and Push is supported');
+    log('Service Worker and Push is supported');
     navigator.serviceWorker.register('service-worker.js')
         .then(function (swReg) {
-            console.log('service worker registered');
+            log('service worker registered');
 
             swRegistration = swReg;
 
@@ -34,7 +43,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                     isSubscribed = !(subscription === null);
 
                     if (isSubscribed) {
-                        console.log('User is allready subscribed');
+                        log('User is allready subscribed');
                     } else {
                         swRegistration.pushManager.subscribe({
                                 userVisibleOnly: true,
@@ -42,14 +51,14 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                             })
                             .then(function (subscription) {
                                 console.table(subscription);
-                                console.log('User is subscribed');
+                                log('User is subscribed');
 
                                 saveSubscription(subscription);
 
                                 isSubscribed = true;
                             })
                             .catch(function (err) {
-                                console.log('Failed to subscribe user: ', err);
+                                log('Failed to subscribe user: ', err);
                             })
                     }
                 })
@@ -82,7 +91,7 @@ function saveSubscription(subscription) {
 self.addEventListener('fetch', function (event) {
     event.respondWith(
         fetch(event.request).catch(function (error) {
-            console.log('Network request Failed. Serving offline page ' + error);
+            log('Network request Failed. Serving offline page ' + error);
             return caches.open('offlinePage').then(function (cache) {
                 return cache.match(baseURL+'offline.html');
             });
@@ -92,14 +101,14 @@ self.addEventListener('fetch', function (event) {
 //This is a event that can be fired from your page to tell the SW to update the offline page
 self.addEventListener('refreshOffline', function (response) {
     return caches.open('offlinePage').then(function (cache) {
-        console.log('Offline page updated from refreshOffline event: ' + response.url);
+        log('Offline page updated from refreshOffline event: ' + response.url);
         return cache.put(offlinePage, response);
     });
 });
 
 // Listen for push-notifications and display them.
 self.addEventListener('push', function (event) {
-    console.log('Push received: ', event);
+    log('Push received: ', event);
     let _data = event.data ? JSON.parse(event.data.text()) : {};
     notificationUrl = _data.url;
     event.waitUntil(

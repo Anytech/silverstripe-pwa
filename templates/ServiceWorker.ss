@@ -17,7 +17,7 @@ self.addEventListener('install', function (event) {
     event.waitUntil(
         fetch(offlinePage).then(function (response) {
             return caches.open('offline-page').then(function (cache) {
-                console.log('Cached offline page during Install ' + response.url);
+                log('Cached offline page during Install ' + response.url);
                 return cache.put(offlinePage, response);
             });
         }));
@@ -27,7 +27,7 @@ self.addEventListener('install', function (event) {
 self.addEventListener('fetch', function (event) {
     event.respondWith(
         fetch(event.request).catch(function (error) {
-            console.log('Network request Failed. Serving offline page ' + error);
+            log('Network request Failed. Serving offline page ' + error);
             return caches.open('offline-page').then(function (cache) {
                 return cache.match(baseURL+'offline.html');
             });
@@ -37,14 +37,14 @@ self.addEventListener('fetch', function (event) {
 //This is a event that can be fired from your page to tell the SW to update the offline page
 self.addEventListener('refreshOffline', function (response) {
     return caches.open('offline-page').then(function (cache) {
-        console.log('Offline page updated from refreshOffline event: ' + response.url);
+        log('Offline page updated from refreshOffline event: ' + response.url);
         return cache.put(offlinePage, response);
     });
 });
 
 // Listen for push-notifications and display them.
 self.addEventListener('push', function (event) {
-    console.log('Push received: ', event);
+    log('Push received: ', event);
     let _data = event.data ? JSON.parse(event.data.text()) : {};
     notificationUrl = _data.url;
     event.waitUntil(
