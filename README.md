@@ -18,7 +18,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 - minishlink/web-push ^5.2
 
 ## Installation
-**Not working right now**
+**Not working right now - Repo is private**
 
 ```
 composer require mdiederen/silverstripe-pwa

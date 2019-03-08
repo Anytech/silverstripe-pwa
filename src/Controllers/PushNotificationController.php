@@ -31,7 +31,7 @@ class PushNotificationController extends Controller
             'VAPID' => [
                 'subject' => 'mailto:michiel@violet88.nl',
                 'publicKey' => file_get_contents(__DIR__ . "/../../_config/public_key.txt"),
-                'privateKey' => file_get_contents(__DIR__ . "/../../_config/private_key.txt"),
+                'privateKey' => file_get_contents(__DIR__ . "/../../_config/private_key.txt"),           
             ],
         ];
 
@@ -43,32 +43,42 @@ class PushNotificationController extends Controller
             case 'POST':
                 $payload = $request->getBody();
 
-
                 foreach($subscribers as $subscriber) {
+                    
+                    $subscriptionArray = [
+                        'endpoint' => $subscriber->endpoint,
+                        'publicKey' => $subscriber->publicKey,
+                        'authToken' => $subscriber->authToken,
+                        'contentEncoding' => $subscriber->contentEncoding
+                    ];
 
-                   $jsonSubscription = $subscriber->subscription;
-                   $subscription = json_decode($jsonSubscription, true);
+                    $subscription = Subscription::create($subscriptionArray);
 
-                   $sub = Subscription::create($subscription);
-
-                   $res = $webPush->sendNotification($sub, $payload);
+                    $sent = $webPush->sendNotification($subscription, $payload);
             
                 }
+
+                $response = [];
 
                 foreach ($webPush->flush() as $report) {
                     $endpoint = $report->getRequest()->getUri()->__toString();
                     $this->getResponse()->addHeader('Content-Type', 'application/json; charset="utf-8"');
-
+                    
                     if ($report->isSuccess()) {
-                        $succes = "Message sent successfully for subscription {$endpoint}.";
-                        return json_encode($succes);
+                        $response[$endpoint] = "Pushed to client!";
                     } else {
-                        // TO-DO verwijderen van abonnee uit DB als deze niet meer actief is.
-                        $error =  "Message failed to sent for subscription {$endpoint}: {$report->getReason()}";
-                        return json_encode($error);
+                        $isTheEndpointWrongOrExpired = $report->isSubscriptionExpired();
+                        if($isTheEndpointWrongOrExpired) {
+                            $response[$endpoint] = "Push Failed, device no longer subscribed.";
 
+                        } else {
+                            $response[$endpoint] = "Push Failed :( {$report->getReason()}";
+
+                        }
                     }
-                } 
+                }
+
+                return json_encode($response);
                 break;
             case 'PUT':
                 echo "Error: PUT-method not handled";

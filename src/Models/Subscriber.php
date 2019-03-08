@@ -9,13 +9,19 @@ use SilverStripe\Forms\TextField;
 class Subscriber extends DataObject
 {
     private static $db = [
-        'subscription' => 'Text'
+        'endpoint' => 'Text',
+        'publicKey' => 'Text',
+        'authToken' => 'Text',
+        'contentEncoding' => 'Text'
     ];
 
     public function getCMSFields()
     {
         $fields = FieldList::create(
-            TextField::create('subscription')
+            TextField::create('endpoint'),
+            TextField::create('publicKey'),
+            TextField::create('authToken'),
+            TextField::create('contentEncoding')
 
         );
 

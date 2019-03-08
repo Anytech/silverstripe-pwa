@@ -26,9 +26,15 @@ class SubscriptionController extends Controller
 
         switch ($method) {
             case 'POST':
+                $subscription = json_decode($request->getBody(), true);
 
                 $subscriber = new Subscriber();
-                $subscriber->__set('subscription',$request->getBody());
+                
+                $subscriber->endpoint = $subscription['endpoint'];
+                $subscriber->publicKey = $subscription['publicKey'];
+                $subscriber->authToken = $subscription['authToken'];
+                $subscriber->contentEncoding = $subscription['contentEncoding'];
+
                 $subscriber->write();
 
                 echo "Subscription added!";
@@ -49,4 +55,3 @@ class SubscriptionController extends Controller
         }
     }
 }
-
