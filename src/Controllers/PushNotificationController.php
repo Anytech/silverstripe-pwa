@@ -71,7 +71,7 @@ class PushNotificationController extends Controller
                         $isTheEndpointWrongOrExpired = $report->isSubscriptionExpired();
                         if($isTheEndpointWrongOrExpired) {
 
-                            // Delete subscriber from db
+                            // Delete subscriber from db when endpoint is expired
                             $subscription = $subscribers->find('endpoint', $endpoint);
                             $subscription->delete();
 

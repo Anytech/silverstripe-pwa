@@ -2,7 +2,7 @@ let isSubscribed = false;
 let swRegistration = null;
 let applicationKey = "$PublicKey";
 var debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
-var baseURL = $BaseUrl;
+var baseURL = "$BaseUrl";
 
     /**
      * Console.log proxy for quick enabling/disabling

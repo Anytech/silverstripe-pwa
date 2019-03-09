@@ -1,6 +1,6 @@
     var version = 'v1::';
     var debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
-    var baseURL = $BaseUrl;
+    var baseURL = "$BaseUrl";
 
     /**
      * Console.log proxy for quick enabling/disabling
