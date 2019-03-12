@@ -58,5 +58,4 @@ class NotificationController extends Controller {
         }
         return $this->config()->get('debug_mode');
     }
-
 }
