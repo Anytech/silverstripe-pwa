@@ -45,6 +45,8 @@ $ openssl ec -in private_key.pem -pubout -outform DER|tail -c 65|base64|tr -d '=
 $ openssl ec -in private_key.pem -outform DER|tail -c +8|head -c 32|base64|tr -d '=' |tr '/+' '_-' >> private_key.txt
 ```
 
+- Add the extension to the pages on which you want to enable push-notifications in the *config.yml* inside the ***/vendor/mdiederen/silverstripe-pwa/_config*** directory.
+
 ## License
 
 See [License](LICENSE)
