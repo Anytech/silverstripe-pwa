@@ -32,7 +32,7 @@ composer require mdiederen/silverstripe-pwa
 Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServiceWorker.js');
 ```
 - Add this metadata to the header of the website
-```
+```html
 <meta name="theme-color" content="$SiteConfig.ManifestColor">
 <link rel="manifest" href="{$BaseHref}manifest.json">
 <script src="{$BaseHref}notifications.js"></script>
