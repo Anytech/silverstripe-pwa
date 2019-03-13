@@ -14,14 +14,13 @@ class SubscriberTest extends SapphireTest
                 'publicKey' => 'Test123',
                 'authToken' => 'Test123',
                 'contentEncoding' => 'Test123'
-            ];
+        ];
 
-            $SubscriberInstance->endpoint = $SubscriberObject['endpoint'];
-            $SubscriberInstance->publicKey = $SubscriberObject['publicKey'];
-            $SubscriberInstance->authToken = $SubscriberObject['authToken'];
-            $SubscriberInstance->contentEncoding = $SubscriberObject['contentEncoding'];
-
-            $SubscriberInstance->write();
+        $SubscriberInstance->endpoint = $SubscriberObject['endpoint'];
+        $SubscriberInstance->publicKey = $SubscriberObject['publicKey'];
+        $SubscriberInstance->authToken = $SubscriberObject['authToken'];
+        $SubscriberInstance->contentEncoding = $SubscriberObject['contentEncoding'];
+        $SubscriberInstance->write();
 
         $this->assertEquals($subscribers +1, Subscriber::get()->count());
     }
