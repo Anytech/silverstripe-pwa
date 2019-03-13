@@ -38,14 +38,14 @@ Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServic
 <script src="{$BaseHref}notifications.js"></script>
 
 ```
-- You have to generate your own private & public key and put them in the ***/vendor/mdiederen/silverstripe-pwa/_config*** directory for the VAPID authentication used by the push-manager. You can do this on unix (linux / MacOS) using the following commands:
+- You have to generate your own private & public key and put them in the '/vendor/mdiederen/silverstripe-pwa/_config' directory for the VAPID authentication used by the push-manager. You can do this on unix (linux / MacOS) using the following commands:
 ```pseudocode
 $ openssl ecparam -genkey -name prime256v1 -out private_key.pem
 $ openssl ec -in private_key.pem -pubout -outform DER|tail -c 65|base64|tr -d '=' |tr '/+' '_-' >> public_key.txt
 $ openssl ec -in private_key.pem -outform DER|tail -c +8|head -c 32|base64|tr -d '=' |tr '/+' '_-' >> private_key.txt
 ```
 
-- Add the extension to the pages on which you want to enable push-notifications in the *config.yml* inside the ***/vendor/mdiederen/silverstripe-pwa/_config*** directory.
+- Add the extension to the pages on which you want to enable push-notifications in the 'config.yml' inside the 'vendor/mdiederen/silverstripe-pwa/_config' directory.
 
 ## License
 
