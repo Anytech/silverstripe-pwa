@@ -28,7 +28,7 @@ class PushExtension extends DataExtension {
         if( $this->owner->notification == false ) 
             return;
 
-        $dataArray = [
+        $payloadArray = [
             'title' => $this->owner->getTitle(),
             'Message' => 'Find out more!',
             'ttl' => 36000,
@@ -38,12 +38,10 @@ class PushExtension extends DataExtension {
             'vibrate' => [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500],
         ];
         
-        $data = json_encode($dataArray);
+        $payload = json_encode($payloadArray);
         $pushController = new PushController();
-        $pushController->sendPush($data);
-            
-        parent::onAfterPublish();
-
+        $pushController->sendPush($payload);
+        
     }
 
 }

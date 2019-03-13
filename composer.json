@@ -8,7 +8,11 @@
         "progressive",
         "web",
         "app",
-        "PWA"
+        "PWA",
+        "Push",
+        "notifications",
+        "service worker",
+        "manifest"
     ],
     "license": "MIT",
     "authors": [{
@@ -25,9 +29,8 @@
         "silverstripe/framework": "^4",
         "silverstripe/vendor-plugin": "^1.0",
         "silverware/colorpicker": "^1.0",
-        "minishlink/web-push": "^5.2",
-        "silverstripe/restfulserver": "dev-master"
-    },
+        "minishlink/web-push": "^5.2"
+        },
     "autoload": {
         "psr-4": {
             "mdiederen\\silverstripe-pwa\\": "src/"
