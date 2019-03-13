@@ -45,7 +45,9 @@ class NotificationController extends Controller {
      * @return varchar
      */
     public function PublicKey() {
-        return (string)file_get_contents(__DIR__ . "/../../_config/public_key.txt");
+        $key = (string)file_get_contents(__DIR__ . "/../../_config/public_key.txt");
+        return substr(trim($key), 0);;
+
     }
     
     /**
