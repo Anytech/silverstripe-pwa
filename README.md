@@ -9,6 +9,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 - Handle incomming push events (Working)
 - Subscribe devices to push-service (Working)
 - Send push-notifications from CMS (Working)
+- Change notification-settings in CMS (Working)
 
 ## Requirements
 - SilverStripe ^4.0
