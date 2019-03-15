@@ -1,1 +1,9 @@
 language: php
+
+before_script:
+  - composer validate
+  - composer require silverstripe/installer:^4.0 --no-update
+  - composer install --prefer-dist
+
+script:
+  - vendor/phpunit/phpunit/phpunit

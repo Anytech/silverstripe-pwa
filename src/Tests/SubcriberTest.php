@@ -1,7 +1,7 @@
 <?php
 
+use SilverStripePWA\Models\Subscriber;
 use SilverStripe\Dev\SapphireTest;
-use SilverstripePWA\Models\Subscriber;
 
 class SubscriberTest extends SapphireTest
 {
