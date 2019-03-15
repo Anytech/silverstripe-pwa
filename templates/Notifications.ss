@@ -115,7 +115,9 @@ self.addEventListener('push', function (event) {
         self.registration.showNotification(_data.title, {
             body: _data.message,
             icon: _data.icon,
-            tag: _data.tag
+            badge: _data.badge,
+            tag: _data.tag,
+            vibrate: _data.vibrate
         })
     );
 });

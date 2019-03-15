@@ -66,7 +66,8 @@ class PushController extends Controller
 
                         }
                     }
-                } 
+                }
+                 
         return json_encode($response);
     }
 }
