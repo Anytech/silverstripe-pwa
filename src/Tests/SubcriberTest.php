@@ -1,9 +1,15 @@
 <?php
+namespace SilverStripePWA\Tests;
 
 use SilverStripePWA\Models\Subscriber;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\ORM\DataObject;
+use Page;
+use PHPUnit\Framework\TestCase;
 
-class SubscriberTest extends SapphireTest
+
+class SubscriberTest extends TestCase
 {
     public function testCreate()
     {
