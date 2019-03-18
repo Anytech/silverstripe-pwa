@@ -8,6 +8,8 @@ use SilverStripe\Forms\TextField;
 
 class Subscriber extends DataObject
 {
+    private static $table_name = "Subscriber";
+
     private static $db = [
         'endpoint' => 'Text',
         'publicKey' => 'Text',
