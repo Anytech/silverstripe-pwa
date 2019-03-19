@@ -40,7 +40,7 @@ class PushArticleExtension extends DataExtension {
                     'ttl' => $config->ttl,
                     'icon' => $icon->fill(512,512)->Link(),
                     'badge' => $badge->fill(128,128)->Link(),
-                    'url' => $this->owner->getAbsoluteLiveLink(false),
+                    'url' => $this->owner->Link(),
                     'vibrate' => [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500],
                 ];
             }
