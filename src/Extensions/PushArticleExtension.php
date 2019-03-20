@@ -36,7 +36,7 @@ class PushArticleExtension extends DataExtension {
 
                 $payloadArray = [
                     'title' => $this->owner->getTitle(),
-                    'Message' => $config->Message,
+                    'message' => $config->Message,
                     'ttl' => $config->ttl,
                     'icon' => $icon->fill(512,512)->Link(),
                     'badge' => $badge->fill(128,128)->Link(),

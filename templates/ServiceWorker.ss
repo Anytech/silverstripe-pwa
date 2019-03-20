@@ -1,6 +1,6 @@
 const debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
 const baseURL = "$BaseUrl";
-let notificationUrl;
+let notificationUrl = "$BaseUrl";
 
 // Console.log proxy for quick enabling/disabling
 function log(msg) {
@@ -59,14 +59,15 @@ self.addEventListener('push', function (event) {
 // Action when the user clicks on the notification
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
-    event.waitUntil(
-        clients.matchAll({
-            type: "window"
-        })
-        .then(function (clientList) {
-            if (clients.openWindow) {
-                return clients.openWindow(notificationUrl);
-            }
-        })
-    );
+    event.waitUntil(clients.matchAll({
+    type: "window"
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url == notificationUrl && 'focus' in client)
+        return client.focus();
+    }
+    if (clients.openWindow)
+      return clients.openWindow(notificationUrl);
+  }));
 });
