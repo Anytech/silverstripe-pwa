@@ -5,7 +5,7 @@ namespace SilverStripePWA\Controllers;
 use SilverStripe\Control\Controller;
 use SilverStripe\SiteConfig\SiteConfig;
 
-class OfflineController extends Controller {
+class OfflinePageController extends Controller {
 
     /**
      * @var array

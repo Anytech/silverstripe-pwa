@@ -2,14 +2,11 @@
 
 namespace SilverStripePWA\Controllers;
 
+use SilverStripePWA\Models\Subscriber;
 use SilverStripe\Control\Controller;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\Control\HTTPRequest;
 
-use SilverStripePWA\Controllers\PushController;
- 
-
-class PushNotificationController extends Controller 
+class RegisterSubscriptionController extends Controller 
 {
     /**
      * @var array
@@ -18,7 +15,6 @@ class PushNotificationController extends Controller
         'index'
     ];
 
-    
     /**
      * Default controller action
      *
@@ -30,9 +26,18 @@ class PushNotificationController extends Controller
 
         switch ($method) {
             case 'POST':
-                $data = $request->getBody();
-                $pushController = new PushController();
-                return $pushController->sendPush($data);
+                $subscription = json_decode($request->getBody(), true);
+
+                $subscriber = new Subscriber();
+                
+                $subscriber->endpoint = $subscription['endpoint'];
+                $subscriber->publicKey = $subscription['publicKey'];
+                $subscriber->authToken = $subscription['authToken'];
+                $subscriber->contentEncoding = $subscription['contentEncoding'];
+
+                $subscriber->write();
+
+                echo "Subscription added!";
 
                 break;
             case 'PUT':
@@ -47,6 +52,6 @@ class PushNotificationController extends Controller
             default:
                 echo "Error: method not handled";
                 return;
-            }
+        }
     }
 }

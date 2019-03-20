@@ -58,7 +58,7 @@ function saveSubscription(subscription) {
     const token = subscription.getKey('auth');
     const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
 
-    return fetch(baseURL + "add_subscription", {
+    return fetch(baseURL + "RegisterSubscription", {
         method: 'POST',
         body: JSON.stringify({
             endpoint: subscription.endpoint,

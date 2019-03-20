@@ -7,9 +7,9 @@ SilverStripe\Control\Director:
     'manifest.json': 'SilverStripePWA\Controllers\ManifestController'
     'service-worker.js': 'SilverStripePWA\Controllers\ServiceWorkerController'
     'RegisterServiceWorker.js': 'SilverStripePWA\Controllers\RegisterServiceWorkerController'
-    'offline.html': 'SilverStripePWA\Controllers\OfflineController'
-    'push': 'SilverStripePWA\Controllers\PushNotificationController'
-    'add_subscription': 'SilverStripePWA\Controllers\SubscriptionController'
+    'offline.html': 'SilverStripePWA\Controllers\OfflinePageController'
+    'push': 'SilverStripePWA\Controllers\SendPushNotificationController'
+    'RegisterSubscription': 'SilverStripePWA\Controllers\RegisterSubscriptionController'
 
 SilverStripe\SiteConfig\SiteConfig:
     extensions:
