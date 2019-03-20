@@ -1,19 +1,16 @@
-    var version = 'v1::';
-    var debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
-    var baseURL = "$BaseUrl";
+let debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
+let baseURL = "$BaseUrl";
 
-    /**
-     * Console.log proxy for quick enabling/disabling
-     */
-    function log(msg){
-        if(debug){
-            console.log(msg);
-        }
+// Console.log proxy for quick enabling/disabling
+function log(msg) {
+    if (debug) {
+        console.log(msg);
     }
+}
 
-    //Install stage sets up the offline page in the cache and opens a new cache
+// Install stage sets up the offline page in the cache and opens a new cache
 self.addEventListener('install', function (event) {
-    var offlinePage = new Request(baseURL+'offline.html');
+    var offlinePage = new Request(baseURL + 'offline.html');
     event.waitUntil(
         fetch(offlinePage).then(function (response) {
             return caches.open('offline-page').then(function (cache) {
@@ -23,18 +20,18 @@ self.addEventListener('install', function (event) {
         }));
 });
 
-//If any fetch fails, it will show the offline page.
+// If any fetch fails, it will show the offline page.
 self.addEventListener('fetch', function (event) {
     event.respondWith(
         fetch(event.request).catch(function (error) {
             log('Network request Failed. Serving offline page ' + error);
             return caches.open('offline-page').then(function (cache) {
-                return cache.match(baseURL+'offline.html');
+                return cache.match(baseURL + 'offline.html');
             });
         }));
 });
 
-//This is a event that can be fired from your page to tell the SW to update the offline page
+// This is a event that can be fired from your page to tell the SW to update the offline page
 self.addEventListener('refreshOffline', function (response) {
     return caches.open('offline-page').then(function (cache) {
         log('Offline page updated from refreshOffline event: ' + response.url);
@@ -51,14 +48,16 @@ self.addEventListener('push', function (event) {
         self.registration.showNotification(_data.title, {
             body: _data.message,
             icon: _data.icon,
-            tag: _data.tag
+            badge: _data.badge,
+            tag: _data.tag,
+            vibrate: _data.vibrate
         })
     );
 });
 
+// Action when the user clicks on the notification
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
-
     event.waitUntil(
         clients.matchAll({
             type: "window"

@@ -6,7 +6,7 @@ SilverStripe\Control\Director:
   rules:
     'manifest.json': 'SilverStripePWA\Controllers\ManifestController'
     'service-worker.js': 'SilverStripePWA\Controllers\ServiceWorkerController'
-    'notifications.js': 'SilverStripePWA\Controllers\NotificationController'
+    'RegisterServiceWorker.js': 'SilverStripePWA\Controllers\RegisterServiceWorkerController'
     'offline.html': 'SilverStripePWA\Controllers\OfflineController'
     'push': 'SilverStripePWA\Controllers\PushNotificationController'
     'add_subscription': 'SilverStripePWA\Controllers\SubscriptionController'

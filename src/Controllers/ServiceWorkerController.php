@@ -39,7 +39,17 @@ class ServiceWorkerController extends Controller {
     public function BaseUrl() {
         return Director::baseURL();
     }
+
     
+    /**
+     * Public Key
+     * @return varchar
+     */
+    public function PublicKey() {
+        $key = (string)file_get_contents(__DIR__ . "/../../_config/public_key.txt");
+        return substr(trim($key), 0);;
+
+    }
     /**
      * Debug mode
      * @return bool

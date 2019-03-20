@@ -4,12 +4,13 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 
 ## Functions
 
-- Deploy a web-manifest from the CMS (Working)
-- Service worker that displays offline-page when there is not connection (Working)
-- Handle incomming push events (Working)
-- Subscribe devices to push-service (Working)
-- Send push-notifications from CMS (Working)
-- Change notification-settings in CMS (Working)
+- Deploy a web-manifest from the CMS **Working**
+- Service worker that displays offline-page when there is not connection **Working**
+- Handle incomming push events **Working**
+- Subscribe devices to push-service **Working**
+- Send push-notifications from CMS **Working**
+- Change notification-settings in CMS **Working**
+- Different kinds of service workers (Offline-page, Cache-first, Pre-cache) **In Development**
 
 ## Requirements
 - SilverStripe ^4.0
@@ -28,15 +29,11 @@ composer require mdiederen/silverstripe-pwa
 ## Usage
 
 - Run dev/build after the installation.
-- Include the js to register the Service Worker
-```php
-Requirements::javascript('mdiederen/silverstripe-pwa:resources/js/registerServiceWorker.js');
-```
 - Add this metadata to the header of the website
 ```html
 <meta name="theme-color" content="$SiteConfig.ManifestColor">
 <link rel="manifest" href="{$BaseHref}manifest.json">
-<script src="{$BaseHref}notifications.js"></script>
+<script src="{$BaseHref}RegisterServiceWorker.js"></script>
 
 ```
 - You have to generate your own private & public key and put them in the `/vendor/mdiederen/silverstripe-pwa/_config` directory for the VAPID authentication used by the push-manager. You can do this on unix (linux / MacOS) using the following commands:
