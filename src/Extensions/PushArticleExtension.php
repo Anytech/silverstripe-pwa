@@ -16,6 +16,7 @@ class PushArticleExtension extends DataExtension {
         'notification' => 'Boolean',
     ];
     
+    // Site extension for sending publish-notification to push-subscriptions
 
     public function updateCMSFields(FieldList $fields) {
         
@@ -29,11 +30,14 @@ class PushArticleExtension extends DataExtension {
             $icon = $config->icon();
             $badge = $config->badge();
 
+            // If notification checkmark is not checked -> return
             if( $this->owner->notification == false ) 
                 return;
             
+            // Check for badge & icon
             if($icon && $icon->exists() && $badge && $badge->exists()){
 
+                // Generate payload
                 $payloadArray = [
                     'title' => $this->owner->getTitle(),
                     'message' => $config->Message,
@@ -45,6 +49,7 @@ class PushArticleExtension extends DataExtension {
                 ];
             }
             
+            // Encode payload & send to push-controller to be pushed
             $payload = json_encode($payloadArray);
             $pushController = new PushController();
             $pushController->sendPush($payload);

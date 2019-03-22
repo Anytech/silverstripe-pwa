@@ -11,7 +11,8 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Forms\TextField;
 
 class PushNotificationsSiteConfigExtension extends DataExtension {
-
+    
+    // Set payload for push-notification
     private static $db = [
         'Message' => 'Text',
         'ttl' => 'Int',

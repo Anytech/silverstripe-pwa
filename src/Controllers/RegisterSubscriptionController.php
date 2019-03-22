@@ -22,6 +22,7 @@ class RegisterSubscriptionController extends Controller
      */
     public function index(HTTPRequest $request) {
 
+        // REST-service for Subscriber model
         $method = $request->httpMethod();
 
         switch ($method) {

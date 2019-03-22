@@ -16,6 +16,8 @@ SilverStripe\SiteConfig\SiteConfig:
         - SilverStripePWA\Extensions\ManifestSiteConfigExtension
         - SilverStripePWA\Extensions\PushNotificationsSiteConfigExtension
 
-# SilverStripe\Lessons\ArticlePage:
+# Add the push-extension to the page of your choosing
+
+# Example\Example\ArticlePage:
 #     extensions:
 #         - SilverStripePWA\Extensions\PushArticleExtension

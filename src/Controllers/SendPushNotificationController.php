@@ -26,6 +26,7 @@ class SendPushNotificationController extends Controller
      */
     public function index(HTTPRequest $request) {
 
+        // REST-service for sending pushnotification (not used in SilverStripe)
         $method = $request->httpMethod();
 
         switch ($method) {
