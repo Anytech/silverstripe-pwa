@@ -1,6 +1,6 @@
 const debug = <% if $DebugMode %>true<% else %>false<% end_if %>;
 const baseURL = "$BaseUrl";
-let notificationUrl = "$BaseUrl";
+let notificationUrl = "/";
 
 // Console.log proxy for quick enabling/disabling
 function log(msg) {

@@ -17,7 +17,7 @@ class PushController extends Controller
         // Get subs from db
         $subscribers = Subscriber::get();
 
-        // Create VAPID (Voluntary Application Server Identification) [optional - required for sending payload with notification]
+        // Create VAPID (Voluntary Application Server Identification) [optional - required for sending notification with payload]
         $auth = [
             'VAPID' => [
                 'subject' => 'mailto:michiel@violet88.nl',
