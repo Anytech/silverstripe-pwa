@@ -22,6 +22,7 @@ class ManifestController extends Controller {
      */
     public function index($url) {
 
+        // Generate Manifest from ManifestSiteConfigExtension
         $config = SiteConfig::current_site_config();
         $baseURL = Director::BaseURL();
         $manifestContent = [];
@@ -47,6 +48,7 @@ class ManifestController extends Controller {
             $manifestContent['display'] = $config->ManifestDisplay;
         }
 
+        // Resample icon for different sizes (Desktop icon, mobile icon etc.)
         $logo = $config->ManifestLogo();
         if($logo && $logo->exists()){
             $mime = $logo->getMimeType();

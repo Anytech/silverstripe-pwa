@@ -9,7 +9,7 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripePWA\Controllers\PushController;
  
 
-class PushNotificationController extends Controller 
+class SendPushNotificationController extends Controller 
 {
     /**
      * @var array
@@ -26,6 +26,7 @@ class PushNotificationController extends Controller
      */
     public function index(HTTPRequest $request) {
 
+        // REST-service for sending pushnotification (not used in SilverStripe)
         $method = $request->httpMethod();
 
         switch ($method) {

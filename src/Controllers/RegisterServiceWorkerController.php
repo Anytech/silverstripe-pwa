@@ -8,7 +8,7 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Core\ClassInfo;
 
-class NotificationController extends Controller {
+class RegisterServiceWorkerController extends Controller {
 
     /**
      * @var array
@@ -29,7 +29,7 @@ class NotificationController extends Controller {
      */
     public function index($url) {
         $this->getResponse()->addHeader('Content-Type', 'application/javascript; charset="utf-8"');
-        return $this->renderWith('Notifications');
+        return $this->renderWith('RegisterServiceWorker');
     }
     
     /**

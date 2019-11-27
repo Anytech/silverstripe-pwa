@@ -6,16 +6,18 @@ SilverStripe\Control\Director:
   rules:
     'manifest.json': 'SilverStripePWA\Controllers\ManifestController'
     'service-worker.js': 'SilverStripePWA\Controllers\ServiceWorkerController'
-    'notifications.js': 'SilverStripePWA\Controllers\NotificationController'
-    'offline.html': 'SilverStripePWA\Controllers\OfflineController'
-    'push': 'SilverStripePWA\Controllers\PushNotificationController'
-    'add_subscription': 'SilverStripePWA\Controllers\SubscriptionController'
+    'RegisterServiceWorker.js': 'SilverStripePWA\Controllers\RegisterServiceWorkerController'
+    'offline.html': 'SilverStripePWA\Controllers\OfflinePageController'
+    'push': 'SilverStripePWA\Controllers\SendPushNotificationController'
+    'RegisterSubscription': 'SilverStripePWA\Controllers\RegisterSubscriptionController'
 
 SilverStripe\SiteConfig\SiteConfig:
     extensions:
         - SilverStripePWA\Extensions\ManifestSiteConfigExtension
         - SilverStripePWA\Extensions\PushNotificationsSiteConfigExtension
 
-# SilverStripe\Lessons\ArticlePage:
+# Add the push-extension to the page of your choosing
+
+# Example\Example\ArticlePage:
 #     extensions:
-#         - SilverStripePWA\Extensions\PushExtension
+#         - SilverStripePWA\Extensions\PushArticleExtension

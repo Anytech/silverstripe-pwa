@@ -6,7 +6,7 @@ use SilverStripePWA\Models\Subscriber;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 
-class SubscriptionController extends Controller 
+class RegisterSubscriptionController extends Controller 
 {
     /**
      * @var array
@@ -22,6 +22,7 @@ class SubscriptionController extends Controller
      */
     public function index(HTTPRequest $request) {
 
+        // REST-service for Subscriber model
         $method = $request->httpMethod();
 
         switch ($method) {
