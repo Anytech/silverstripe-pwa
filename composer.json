@@ -1,5 +1,5 @@
 {
-    "name": "mdiederen/silverstripe-pwa",
+    "name": "Anytech/silverstripe-pwa",
     "description": "Module that adds PWA support to SilverStripe project",
     "homepage": "http://github.com/mdiederen/silverstripe-pwa",
     "type": "silverstripe-vendormodule",
@@ -16,11 +16,11 @@
     ],
     "license": "MIT",
     "authors": [{
-        "name": "Michiel Diederen",
-        "email": "michiel@violet88.nl"
+        "name": "Kayne Middleton",
+        "email": "kayne@anytech.ca"
     }],
     "support": {
-        "issues": "http://github.com/mdiederen/silverstripe-pwa/issues"
+        "issues": "http://github.com/Anytech/silverstripe-pwa/issues"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -33,7 +33,7 @@
         },
     "autoload": {
         "psr-4": {
-            "mdiederen\\silverstripe-pwa\\": "src/"
+            "anytech\\silverstripe-pwa\\": "src/"
         }
     },
     "require-dev": {
