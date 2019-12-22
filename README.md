@@ -21,7 +21,7 @@ This module will add a Service Worker & Web Manifest to your SilverStripe Projec
 ## Installation
 
 ```console
-composer require mdiederen/silverstripe-pwa
+composer require Anytech/silverstripe-pwa
 ```
 
 ## Usage
