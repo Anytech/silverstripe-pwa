@@ -51,14 +51,15 @@ self.addEventListener('push', function (event) {
             icon: _data.icon,
             badge: _data.badge,
             tag: _data.tag,
-            vibrate: _data.vibrate
+            vibrate: _data.vibrate,
+	    data: _data.url
         })
     );
 });
 
 // Action when the user clicks on the notification
 self.addEventListener('notificationclick', function (event) {
-    event.notification.close();
+	notificationUrl = event.notification.data;
 	   event.waitUntil(
         clients.matchAll({ type: 'window', includeUncontrolled: true })
             .then(function(clientList) {
@@ -76,4 +77,5 @@ self.addEventListener('notificationclick', function (event) {
                 return clients.openWindow(notificationUrl);
             })
     );
+	event.notification.close();
 });
